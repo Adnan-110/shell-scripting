@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Special Variables are $0 to $9, $$, $*, $@, $#
+# Special Variables are $0 to $9, $$, $*, $@, $#, $?
 
 echo "Printing Script Name : $0"   # $0 prints the script name
 
@@ -18,6 +18,7 @@ echo "Total Number of Arguments are : $# "   # Prints the overall arguments used
 echo "Exit Code of the last command is : $? "   # This prints the exit code of the last command
 echo "Print all the arguments are used : $* "   # Prints all the arguments used.
 echo "Print all the arguments are used : $@ "  # Prints all the arguments used.
+echo "Process ID : $$"    # $$  is going to print the PID of the current proces 
 
 # echo "Variables Used In The Script $*"    # $* is going to print the used variables  
 # echo "Variabels used are $@"              # $@ is going to print the used variables  
