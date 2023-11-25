@@ -32,6 +32,7 @@ f   # calling a function
 
 
 b56() {
+    echo -e "\n"
     echo "This is our batch56 function"
     echo "We are learning functions"
     echo "Todays date is:"
@@ -43,9 +44,9 @@ b56
 
 stat() {
     echo -e "\n\n\n\n"
-    echo "Number of sessions opened $(who|wc -l)"
-    echo "Todays date is $(date +%F)"
-    echo "AVG Cpu Utilization In The Last 5 minues is : $(uptime|awk -F : '{print $NF}' | awk -F ',' '{print $2}')"
+    echo "Number of Active Sessions : $(who|wc -l)"
+    echo "Today's Date is $(date +%F)"
+    echo "AVG Cpu Utilization In The Last 5 Minutes is : $(uptime|awk -F : '{print $NF}' | awk -F ',' '{print $2}')"
 
     b56  # calling a function from another function
 }
