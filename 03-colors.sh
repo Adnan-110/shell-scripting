@@ -25,5 +25,5 @@ echo -e "\n\n\n"
 
 # Background + Foreground
 
-echo -e "\e[43;34m I am printing text with Yellow color in background and Blue in foreground\e[0m"
+echo -e "\e[31;46m I am printing text with Yellow color in background and Blue in foreground\e[0m"
 
