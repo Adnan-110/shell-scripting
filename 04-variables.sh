@@ -13,5 +13,18 @@ b=Ten
 # To print a variable u need to start with a $ sign.
 # Example below 
 
-echo printing the value of a : $a
-echo printing the value of b : ${b}
+echo printing the value of a : $a           # ${a} and $a both are same.
+echo printing the value of b : ${b}         # ${b} and $b both are same.
+
+# If you dont declare the variable and try to print it, that will print empty string/ null
+# Example below
+
+echo printing the value of c : $c
+
+# Advantage is that it won't throw any error but there is advantage of this functionaltiy as well
+
+#For example if run below command, since there is no CUSTDATA variable declared it will delete the prod directory
+
+#rm -rf /data/prod/${CUSTDATA}  
+
+#in above case the above command is similar to rm -rf /data/prod/
