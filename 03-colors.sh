@@ -21,3 +21,9 @@ echo -e "\e[34m I am printing Blue colored text\e[0m"
 echo -e "\e[35m I am printing Magenta colored text\e[0m"
 echo -e "\e[36m I am printing Cyan colored text\e[0m"
 
+echo -e "\n\n\n"
+
+# Background + Foreground
+
+echo -e "\e[43;34m I am printing text with Yellow color in background and Blue in foreground\e[0m"
+
