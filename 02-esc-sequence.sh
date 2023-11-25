@@ -21,3 +21,4 @@ echo -e "Line1 \n Line2"
 echo Line3
 echo -e "Line4\tLine5"
 echo Line6
+echo *********
