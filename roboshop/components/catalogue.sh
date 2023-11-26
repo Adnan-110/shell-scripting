@@ -1,8 +1,5 @@
 #!/bin/bash
 
-
-#!/bin/bash
-
 USER_ID=$(id -u)
 COMPONENT=catalogue
 LOG_FILE="/tmp/${COMPONENT}.log"
