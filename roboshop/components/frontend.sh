@@ -12,7 +12,7 @@ echo -e "************\e[33m Configuring the FrontEnd Component \e[0m************
 
 echo -n "Installing Nginx :" 
 
-yum install nginx -y    &>> /tmp/${1}.log
+yum install nginx -y    &>> /tmp/frontend.log
 
 if  [ $? -eq 0 ] ; then
     echo -e "\e[32m Successfully Completed \e[0m"
