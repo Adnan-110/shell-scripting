@@ -24,7 +24,7 @@ fi
 
 echo -e "************\e[33m Configuring the Catalogue Component \e[0m************"
 echo -n "Installing the NodeJS :"
-yum install https://rpm.nodesource.com/pub_16.x/nodistro/repo/nodesource-release-nodistro-1.noarch.rpm -y
+yum install https://rpm.nodesource.com/pub_16.x/nodistro/repo/nodesource-release-nodistro-1.noarch.rpm -y &>> $LOG_FILE
 stat $?
 
 echo -n "Creating the RoboShop User :"
