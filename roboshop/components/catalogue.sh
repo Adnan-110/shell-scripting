@@ -6,7 +6,9 @@
 USER_ID=$(id -u)
 COMPONENT=catalogue
 LOG_FILE="/tmp/${COMPONENT}.log"
-SCHEMA_URL="https://github.com/stans-robot-project/mongodb/archive/main.zip"
+COMPONENT_URL="https://github.com/stans-robot-project/catalogue/archive/main.zip"
+APPUSER=roboshop
+APPUSER_HOME="/home/${APPUSER}/${COMPONENT}"
 
 stat(){
     if  [ $1 -eq 0 ] ; then      #Since $? is first arg while calling function so we are checking using $1
@@ -28,23 +30,31 @@ yum install https://rpm.nodesource.com/pub_16.x/nodistro/repo/nodesource-release
 stat $?
 
 echo -n "Creating the RoboShop User :"
-useradd roboshop
-stat $?
+id $APPUSER     &>> $LOG_FILE
+if [ $? -ne 0 ] ; then
+    useradd $APPUSER
+    stat $?
+else
+    echo -n "Already Exist"
+fi
 
-echo -n "Switching to the RoboShop User :"
-su - roboshop
-stat $?
-
-echo -n "Configuring the Catalogue in roboshop user :"
-curl -s -L -o /tmp/${COMPONENT}.zip
+echo -n "Downloading the Catalogue Component :"
+curl -s -L -o /tmp/${COMPONENT}.zip $COMPONENT_URL      &>> $LOG_FILE
 stat $?
 
 echo -n "Extracting the Catalogue in roboshop user :"
 cd /home/roboshop
-unzip /tmp/${COMPONENT}.zip
+unzip -o /tmp/${COMPONENT}.zip      &>> $LOG_FILE
 stat $?
 
-echo -n "Installing the Catalogue Component Dependencies in roboshop user :"
-mv ${COMPONENT}-main ${COMPONENT}
-cd /home/roboshop/${COMPONENT}
-npm install
+echo -n "Configuring the Catalogue Component Permissions :"
+mv ${APPUSER_HOME}-main ${APPUSER_HOME}
+chown -R $APPUSER:$APPUSER $APPUSER_HOME 
+chmod -R 770 $APPUSER_HOME
+stat $?
+
+echo -n "Installing the Catalogue Component Dependencies :"
+cd ${APPUSER_HOME}
+npm install         >> $LOG_FILE
+stat $?
+
