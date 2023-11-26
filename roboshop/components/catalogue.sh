@@ -55,3 +55,15 @@ cd $APPUSER_HOME
 npm install      &>> $LOG_FILE
 stat $?
 
+echo -n "Configuring the Catalogue Component Systemd File :"
+sed -i -e 's/MONGO_DNSNAME/172.31.23.77/' $APPUSER_HOME/systemd.service
+mv ${APPUSER_HOME}/systemd.service /etc/systemd/system/${COMPONENT}.service
+stat $?
+
+echo -n "Starting the Catalogue Component Services :"
+systemctl daemon-reload         &>> $LOG_FILE
+systemctl enable $COMPONENT     &>> $LOG_FILE
+systemctl restart $COMPONENT    &>> $LOG_FILE
+stat $?
+
+echo -e "************\e[33m Configuration of the Catalogue Component is Completed \e[0m************"
