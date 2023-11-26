@@ -55,6 +55,10 @@ rm -rf ${COMPONENT}-main README.md
 mv localhost.conf /etc/nginx/default.d/roboshop.conf
 stat $?
 
+echo -n "Updating Reverse Proxy :"
+sed -i -e "/catalogue/s/localhost/172.31.18.151/" /etc/nginx/default.d/roboshop.conf
+stat $?
+
 echo -n "Restarting the ${COMPONENT} Component :"
 systemctl enable nginx      &>> $LOG_FILE
 systemctl daemon reload     &>> $LOG_FILE
