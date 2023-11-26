@@ -37,6 +37,7 @@ echo -n "Starting MongoDB :"
 systemctl enable mongod      &>> $LOG_FILE
 systemctl daemon-reload      &>> $LOG_FILE
 systemctl restart mongod     &>> $LOG_FILE
+stat $?
 
 echo -n "Downloading the MongoDB Schema :"
 curl -s -L -o /tmp/${COMPONENT}.zip $SCHEMA_URL
