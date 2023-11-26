@@ -48,13 +48,13 @@ unzip -o /tmp/${COMPONENT}.zip      &>> $LOG_FILE
 stat $?
 
 echo -n "Configuring the Catalogue Component Permissions :"
-mv ${APPUSER_HOME}-main ${APPUSER_HOME}
+mv ${APPUSER_HOME}-main $APPUSER_HOME
 chown -R $APPUSER:$APPUSER $APPUSER_HOME 
 chmod -R 770 $APPUSER_HOME
 stat $?
 
 echo -n "Installing the Catalogue Component Dependencies :"
-cd ${APPUSER_HOME}
-npm install         >> $LOG_FILE
+cd $APPUSER_HOME
+npm install      &>> $LOG_FILE
 stat $?
 
