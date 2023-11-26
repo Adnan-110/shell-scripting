@@ -20,13 +20,18 @@ else
     echo -e "\e[31m Failed to Install \e[0m"
 fi
     
-    
+echo -n "Downloading the Component $1 :"
+curl -s -L -o /tmp/frontend.zip "https://github.com/stans-robot-project/frontend/archive/main.zip" 
+if  [ $? -eq 0 ] ; then
+    echo -e "\e[32m Successfully Completed \e[0m"
+else
+    echo -e "\e[31m Failed to Download \e[0m"
+fi
 
 
 # systemctl enable nginx
 # systemctl start nginx
 
-# curl -s -L -o /tmp/frontend.zip "https://github.com/stans-robot-project/frontend/archive/main.zip"
 # cd /usr/share/nginx/html
 # rm -rf *
 # unzip /tmp/frontend.zip
