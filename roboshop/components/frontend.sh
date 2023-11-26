@@ -2,7 +2,7 @@
 
 UID=$(id -u)
 
-if [ UID -ne 0 ] ; then
+if [ $UID -ne 0 ] ; then
     echo -e "\e[31m !!!!!!!!!!!! This Script is Expected to be Executed with sudo or as a root user !!!!!!!!!!!!\e[0m"
     echo -e "\e[35m Example Usage : \n\t\t \e[0m sudo bash scriptName componentName"
     exit 1
