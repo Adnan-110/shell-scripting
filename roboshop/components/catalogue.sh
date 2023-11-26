@@ -48,7 +48,7 @@ unzip -o /tmp/${COMPONENT}.zip      &>> $LOG_FILE
 stat $?
 
 echo -n "Configuring the Catalogue Component Permissions :"
-mv ${APPUSER_HOME}-main $APPUSER_HOME
+mv ${APPUSER_HOME}-main $APPUSER_HOME &>> $LOG_FILE
 chown -R $APPUSER:$APPUSER $APPUSER_HOME 
 chmod -R 770 $APPUSER_HOME
 stat $?
