@@ -39,6 +39,10 @@ echo -n "Downloading the Catalogue Component :"
 curl -s -L -o /tmp/${COMPONENT}.zip $COMPONENT_URL      &>> $LOG_FILE
 stat $?
 
+echo -n "Performing Clean-Up of the Catalogue Component :"
+rm -rf $APPUSER_HOME    &>> $LOG_FILE
+stat $?
+
 echo -n "Extracting the Catalogue in roboshop user :"
 cd /home/roboshop
 unzip -o /tmp/${COMPONENT}.zip      &>> $LOG_FILE
