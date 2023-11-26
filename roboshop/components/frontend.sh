@@ -44,8 +44,8 @@ cd /usr/share/nginx/html
 rm -rf *    &>> $LOG_FILE
 stat $?
 
-echo -n "Extracting of ${COMPONENT} Component :"
-unzip /tmp/frontend.zip     &>> $LOG_FILE
+echo -n "Extracting the ${COMPONENT} Component :"
+unzip -o /tmp/${COMPONENT}.zip     &>> $LOG_FILE
 stat $?
 
 echo -n "Configuration of ${COMPONENT} Component :"
