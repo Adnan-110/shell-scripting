@@ -36,8 +36,8 @@ unzip -o ${COMPONENT}.zip     &>> $LOG_FILE
 stat $?
 
 echo -n "Configuration of ${COMPONENT} Component :"
-mv ${COMPONENT}-main/* . || true
-mv static/* .            || true
+mv ${COMPONENT}-main/* .
+mv static/* .            
 rm -rf ${COMPONENT}-main README.md
 mv localhost.conf /etc/nginx/default.d/roboshop.conf
 stat $?
