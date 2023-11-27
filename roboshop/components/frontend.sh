@@ -56,12 +56,8 @@ mv localhost.conf /etc/nginx/default.d/roboshop.conf
 stat $?
 
 echo -n "Updating Reverse Proxy for Catalogue :"
-sed -i -e "/catalogue/s/localhost/172.31.18.151/" /etc/nginx/default.d/roboshop.conf
+sed -i -e "/catalogue/s/localhost/catalogue.roboshop.internal.com/" /etc/nginx/default.d/roboshop.conf
 stat $?
-
-echo -n "Updating Reverse Proxy for Catalogue :"
-sed -i -e "/catalogue/s/localhost/172.31.18.151/" /etc/nginx/default.d/roboshop.conf
-
 
 echo -n "Restarting the ${COMPONENT} Component :"
 systemctl enable nginx      &>> $LOG_FILE
