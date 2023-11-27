@@ -59,6 +59,10 @@ echo -n "Updating Reverse Proxy for Catalogue :"
 sed -i -e "/catalogue/s/localhost/catalogue.roboshop.internal.com/" /etc/nginx/default.d/roboshop.conf
 stat $?
 
+echo -n "Updating Reverse Proxy for User :"
+sed -i -e "/user/s/localhost/user.roboshop.internal.com/" /etc/nginx/default.d/roboshop.conf
+stat $?
+
 echo -n "Restarting the ${COMPONENT} Component :"
 systemctl enable nginx      &>> $LOG_FILE
 systemctl daemon reload     &>> $LOG_FILE
