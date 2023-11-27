@@ -44,15 +44,16 @@ stat $?
 echo -n "Updating Reverse Proxy :"
     for component in catalogue user cart ; do 
         sed -i -e "/${component}/s/localhost/${component}.roboshop.internal.com/" /etc/nginx/default.d/roboshop.conf
+    done
     DOWNLOAD__AND_EXTRACT
-stat $?
+    stat $?
 
 
 echo -n "Restarting the ${COMPONENT} Component :"
 systemctl enable nginx      &>> $LOG_FILE
 systemctl daemon reload     &>> $LOG_FILE
 systemctl restart nginx     &>> $LOG_FILE
-stat $?
+stat $?     
 
 echo -e "************\e[33m Configuration of the FrontEnd Component is Completed \e[0m************"
 #echo -e "***** \e[35m $COMPONENT Configuration Is Complted \e[0m ******"
