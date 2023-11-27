@@ -36,4 +36,5 @@ systemctl daemon-reload      &>> $LOG_FILE
 systemctl restart redis     &>> $LOG_FILE
 stat $?
 
+echo -e "************\e[33m Configuration of the Redis is Completed \e[0m************"
 
