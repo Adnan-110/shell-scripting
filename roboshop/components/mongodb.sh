@@ -51,6 +51,7 @@ stat $?
 echo -n "Injecting the Schema :"
 cd mongodb-main         &>> $LOG_FILE
 mongo < catalogue.js    &>> $LOG_FILE
+stat $?
 mongo < users.js        &>> $LOG_FILE
 stat $?
 

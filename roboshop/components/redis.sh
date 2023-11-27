@@ -30,7 +30,7 @@ sed -i -e 's/127.0.0.1/0.0.0.0/' /etc/redis.conf
 sed -i -e 's/127.0.0.1/0.0.0.0/' /etc/redis/redis.conf
 stat $?
 
-echo -n "Starting Reddis :"
+echo -n "Starting Redis :"
 systemctl enable redis      &>> $LOG_FILE
 systemctl daemon-reload      &>> $LOG_FILE
 systemctl restart redis     &>> $LOG_FILE
