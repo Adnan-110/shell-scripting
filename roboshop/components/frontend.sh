@@ -46,7 +46,6 @@ echo -n "Updating Reverse Proxy :"
     for component in catalogue user cart ; do 
         sed -i -e "/${component}/s/localhost/${component}.roboshop.internal.com/" /etc/nginx/default.d/roboshop.conf
     done
-    DOWNLOAD__AND_EXTRACT
     stat $?
 
 
