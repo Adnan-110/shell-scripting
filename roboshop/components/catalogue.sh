@@ -3,7 +3,7 @@
 USER_ID=$(id -u)
 COMPONENT=catalogue
 LOG_FILE="/tmp/${COMPONENT}.log"
-COMPONENT_URL="https://github.com/stans-robot-project/catalogue/archive/main.zip"
+COMPONENT_URL="https://github.com/stans-robot-project/${COMPONENT}/archive/main.zip"
 APPUSER=roboshop
 APPUSER_HOME="/home/${APPUSER}/${COMPONENT}"
 
@@ -60,7 +60,7 @@ npm install      &>> $LOG_FILE
 stat $?
 
 echo -n "Configuring the Catalogue Component Systemd File :"
-sed -i -e 's/MONGO_DNSNAME/172.31.23.77/' $APPUSER_HOME/systemd.service
+sed -i -e 's/MONGO_DNSNAME/mongodb.roboshop.internal.com/' $APPUSER_HOME/systemd.service
 mv ${APPUSER_HOME}/systemd.service /etc/systemd/system/${COMPONENT}.service
 stat $?
 
