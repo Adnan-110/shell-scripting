@@ -7,7 +7,8 @@ source components/common.sh
 echo -e "************\e[33m Configuring the MySQL \e[0m************"
 
 echo -n "Configuring the ${COMPONENT} Repos :"
-curl -s -L -o /etc/yum.repos.d/${COMPONENT}.repostat $COMPONENT_URL
+# curl -s -L -o /etc/yum.repos.d/${COMPONENT}.repostat $COMPONENT_URL
+curl -s -L -o /etc/yum.repos.d/ ${COMPONENT}.repo https://raw.githubusercontent.com/stans-robot-project/${COMPONENT}/main/${COMPONENT}.repo
 stat $?
 
 echo -n "Installing the ${COMPONENT} :"
