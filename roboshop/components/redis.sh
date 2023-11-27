@@ -21,7 +21,7 @@ fi
 echo -e "************\e[33m Configuring the Redis \e[0m************"
 
 echo -n "Installing Redis :"
-curl -L https://raw.githubusercontent.com/stans-robot-project/redis/main/redis.repo -o /etc/yum.repos.d/redis.repo  
+curl -L https://raw.githubusercontent.com/stans-robot-project/redis/main/redis.repo -o /etc/yum.repos.d/redis.repo  &>> $LOG_FILE
 yum install redis-6.2.13 -y &>> $LOG_FILE
 stat $?
 
