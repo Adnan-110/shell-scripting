@@ -60,7 +60,7 @@ CONFIG_SVS() {
 }
 
 START_SVS() {
-    echo -n "Starting the Catalogue Component Services :"
+    echo -n "Starting the ${COMPONENT} Component Services :"
     systemctl daemon-reload         &>> $LOG_FILE
     systemctl enable $COMPONENT     &>> $LOG_FILE
     systemctl restart $COMPONENT    &>> $LOG_FILE
