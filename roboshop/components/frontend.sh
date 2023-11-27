@@ -41,17 +41,12 @@ rm -rf ${COMPONENT}-main README.md
 mv localhost.conf /etc/nginx/default.d/roboshop.conf
 stat $?
 
-echo -n "Updating Reverse Proxy for Catalogue :"
-sed -i -e "/catalogue/s/localhost/catalogue.roboshop.internal.com/" /etc/nginx/default.d/roboshop.conf
+echo -n "Updating Reverse Proxy :"
+    for component in catalogue user cart ; do 
+        sed -i -e "/${component}/s/localhost/${component}.roboshop.internal.com/" /etc/nginx/default.d/roboshop.conf
+    DOWNLOAD__AND_EXTRACT
 stat $?
 
-echo -n "Updating Reverse Proxy for User :"
-sed -i -e "/user/s/localhost/user.roboshop.internal.com/" /etc/nginx/default.d/roboshop.conf
-stat $?
-
-echo -n "Updating Reverse Proxy for Cart :"
-sed -i -e "/cart/s/localhost/cart.roboshop.internal.com/" /etc/nginx/default.d/roboshop.conf
-stat $?
 
 echo -n "Restarting the ${COMPONENT} Component :"
 systemctl enable nginx      &>> $LOG_FILE
