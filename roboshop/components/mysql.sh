@@ -20,4 +20,8 @@ systemctl enable mysqld     &>> $LOG_FILE
 systemctl start mysqld      &>> $LOG_FILE
 stat $?
 
+echo -n "Extracting ${COMPONENT} Default Root Password : "
+DEFAULT_ROOT_PSWD=$(sudo grep "temporary password" /var/log/mysqld.log | awk -F " " '{print $NF}')
+stat $?
+
 echo -e "************\e[33m Configuration of the MySQL is Completed \e[0m************"

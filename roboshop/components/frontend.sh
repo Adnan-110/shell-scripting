@@ -31,8 +31,8 @@ rm -rf *    &>> $LOG_FILE
 stat $?
 
 echo -n "Extracting the ${COMPONENT} Component :"
-cd /tmp/
-unzip -o ${COMPONENT}.zip     &>> $LOG_FILE
+unzip -o /tmp/${COMPONENT}.zip    &>> $LOGFILE
+# unzip -o ${COMPONENT}.zip     &>> $LOG_FILE
 stat $?
 
 echo -n "Configuration of ${COMPONENT} Component :"
