@@ -54,7 +54,7 @@ CONFIG_SVS() {
     stat $?
 
     echo -n "Configuring the ${COMPONENT} Component Systemd File :"
-    sed -i -e 's/MONGO_DNSNAME/mongodb.roboshop.internal.com/' -e 's/REDIS_ENDPOINT/redis.roboshop.internal.com/' -e 's/CATALOGUE_ENDPOINT/catalogue.roboshop.internal.com/' -e 's/REDIS_ENDPOINT/redis.roboshop.internal.com/' -e 's/MONGO_ENDPOINT/mongodb.roboshop.internal.com/' $APPUSER_HOME/systemd.service
+    sed -i -e 's/MONGO_DNSNAME/mongodb.roboshop.internal.com/' -e 's/REDIS_ENDPOINT/redis.roboshop.internal.com/' -e 's/CATALOGUE_ENDPOINT/catalogue.roboshop.internal.com/' -e 's/REDIS_ENDPOINT/redis.roboshop.internal.com/' -e 's/MONGO_ENDPOINT/mongodb.roboshop.internal.com/' -e 's/CARTENDPOINT/cart.roboshop.internal.com/' -e 's/DBHOST/mysql.roboshop.internal.com' $APPUSER_HOME/systemd.service
     mv ${APPUSER_HOME}/systemd.service /etc/systemd/system/${COMPONENT}.service
     stat $?
 }
@@ -83,4 +83,25 @@ NodeJS() {
     stat $?
 
     START_SVS
+}
+
+JAVA() {
+    echo -n "Installing the Maven :"
+    curl "https://gitlab.com/thecloudcareers/opensource/-/raw/master/lab-tools/maven-java11/install.sh"   &>> $LOG_FILE
+    stat $? 
+
+    CREATE_USER #Calls create user function that creates user
+
+    DOWNLOAD__AND_EXTRACT
+
+    echo -n "Installing the ${COMPONENT} Component Dependencies :"
+    cd $APPUSER_HOME
+    mvn clean package   >> $LOG_FILE
+    mv target/${COMPONENT}-1.0.jar ${COMPONENT}.jar     &
+    stat $?
+
+    CONFIG_SVS
+
+    START_SVS
+    
 }
