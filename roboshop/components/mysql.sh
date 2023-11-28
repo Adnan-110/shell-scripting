@@ -24,4 +24,31 @@ echo -n "Extracting ${COMPONENT} Default Root Password : "
 DEFAULT_ROOT_PSWD=$(sudo grep "temporary password" /var/log/mysqld.log | awk -F " " '{print $NF}')
 stat $?
 
+echo "show databases;" | mysql -uroot -pRoboShop@1           &>> $LOG_FILE
+if [ $? -ne 0 ] ; then
+    echo "Changing $COMPONENT root password : "
+    echo "ALTER USER 'root'@'localhost' IDENTIFIED BY 'RoboShop@1'" | mysql --connect-expired-password -uroot -p$DEFAULT_ROOT_PSWD      &>> $LOG_FILE
+    stat$?
+fi
+
+echo "show plugins" | mysql mysql -uroot -pRoboShop@1 | grep validate_password           &>> $LOG_FILE
+if [ $? -eq 0 ] ; then
+    echo "Uninstalling the password validate plugin : "
+    echo "uninstall plugin validate_password;" | mysql -uroot -pRoboShop@1      &>> $LOG_FILE
+    stat $?
+fi
+
+echo "Downloading $COMPONENT Schema : " 
+curl -s -L -o /tmp/${COMPONENT}.zip "https://github.com/stans-robot-project/${COMPONENT}/archive/main.zip"
+stat $?
+
+echo "Extracting the $COMPONENT : "
+unzip -o /tmp/${COMPONENT}.zip      &>> $LOG_FILE
+stat $?
+
+echo "Injecting the Schema :"
+cd $COMPONENT-main
+mysql -u root -pRoboShop@1 <shipping.sql     &>> $LOG_FILE
+stat $?
+
 echo -e "************\e[33m Configuration of the MySQL is Completed \e[0m************"
