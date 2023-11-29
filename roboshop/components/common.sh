@@ -107,3 +107,22 @@ JAVA() {
     START_SVS
     
 }
+
+PYTHON() {
+    echo -n "Installing the Python :"
+    yum install python36 gcc python3-devel -y &>> $LOG_FILE
+    stat $? 
+
+    CREATE_USER #Calls create user function that creates user
+
+    DOWNLOAD__AND_EXTRACT
+
+    echo -n "Installing the ${COMPONENT} Component Dependencies :"
+    cd $APPUSER_HOME
+    pip3 install -r requirements.txt   &>> $LOG_FILE
+    stat $?
+
+    CONFIG_SVS
+
+    START_SVS
+}
