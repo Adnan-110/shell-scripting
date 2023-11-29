@@ -27,7 +27,7 @@ CREATE_USER() {
         useradd $APPUSER
         stat $?
     else
-        echo -ne  "Already Exist \n"
+        echo -ne  "\e[33m Already Exist \e[0m\n"
     fi
 }
 
