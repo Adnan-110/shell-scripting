@@ -15,8 +15,8 @@ yum install rabbitmq-server -y  &>> $LOG_FILE
 stat $?
 
 echo -n "Starting $COMPONENT Service :"
-systemctl enable rabbitmq-server       &>> $LOGFILE
-systemctl start rabbitmq-server        &>> $LOGFILE
+systemctl enable rabbitmq-server       &>> $LOG_FILE
+systemctl start rabbitmq-server        &>> $LOG_FILE
 stat $?
 
 rabbitmqctl list_users | grep ${APPUSER}  &>> $LOG_FILE
