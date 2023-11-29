@@ -124,5 +124,10 @@ PYTHON() {
 
     CONFIG_SVS
 
+    USER_ID=(id -u roboshop)
+    GROUP_ID=(id -g roboshop)
+    echo -n "Updating the UID & GID of the Payment.ini file : "
+    sed -i -e "/^uid/ c uid=${USER_ID}" "/^gid/ c gid=${GROUP_ID}" "${APPUSER_HOME}/${COMPONENT}.ini"
+
     START_SVS
 }
