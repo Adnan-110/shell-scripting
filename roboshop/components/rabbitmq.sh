@@ -6,15 +6,18 @@ source components/common.sh
 echo -e "************\e[33m Configuring the RabbitMQ \e[0m************"
 
 echo -n "Configuring the $COMPONENT Repos :"
-curl -s https://packagecloud.io/install/repositories/${COMPONENT}/erlang/script.rpm.sh | sudo bash      &>>LOG_FILE
-curl -s https://packagecloud.io/install/repositories/${COMPONENT}/${COMPONENT}-server/script.rpm.sh | sudo bash    &>> $LOG_FILE
+curl -s https://packagecloud.io/install/repositories/rabbitmq/erlang/script.rpm.sh | sudo bash      &>>LOG_FILE
+curl -s https://packagecloud.io/install/repositories/rabbitmq/rabbitmq-server/script.rpm.sh | sudo bash    &>> $LOG_FILE
 stat $?
 
 echo -n "Installing the $COMPONENT :"
 yum install rabbitmq-server -y  &>> $LOG_FILE
 stat $?
 
-START_SVS
+echo -n "Starting $COMPONENT Service :"
+systemctl enable rabbitmq-server       &>> $LOGFILE
+systemctl start rabbitmq-server        &>> $LOGFILE
+stat $?
 
 rabbitmqctl list_users | grep ${APPUSER}  &>> $LOG_FILE
 if [ $? -ne 0 ] ; then
