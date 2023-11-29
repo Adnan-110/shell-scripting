@@ -32,7 +32,7 @@ CREATE_USER() {
 }
 
 DOWNLOAD__AND_EXTRACT() {
-        echo -n "Downloading the ${COMPONENT} Component :"
+    echo -n "Downloading the ${COMPONENT} Component :"
     curl -s -L -o /tmp/${COMPONENT}.zip $COMPONENT_URL      &>> $LOG_FILE
     stat $?
 
@@ -41,14 +41,15 @@ DOWNLOAD__AND_EXTRACT() {
     stat $?
 
     echo -n "Extracting the ${COMPONENT} in roboshop user :"
-    cd /home/roboshop
+    cd /home/${APPUSER}
     unzip -o /tmp/${COMPONENT}.zip      &>> $LOG_FILE
+    mv /home/${APPUSER}/${COMPONENT}-main /home/${APPUSER}/${COMPONENT}
     stat $?
 }
 
 CONFIG_SVS() {
     echo -n "Configuring the ${COMPONENT} Component Permissions :"
-    mv ${APPUSER_HOME}-main $APPUSER_HOME &>> $LOG_FILE
+    #   mv ${APPUSER_HOME}-main $APPUSER_HOME &>> $LOG_FILE
     chown -R $APPUSER:$APPUSER $APPUSER_HOME 
     chmod -R 770 $APPUSER_HOME
     stat $?
@@ -96,7 +97,7 @@ JAVA() {
 
     echo -n "Installing the ${COMPONENT} Component Dependencies :"
     cd $APPUSER_HOME
-    mvn clean package   >> $LOG_FILE
+    mvn clean package   &>> $LOG_FILE
     mv target/${COMPONENT}-1.0.jar ${COMPONENT}.jar     &
     stat $?
 
