@@ -88,7 +88,8 @@ NodeJS() {
 
 JAVA() {
     echo -n "Installing the Maven :"
-    curl "https://gitlab.com/thecloudcareers/opensource/-/raw/master/lab-tools/maven-java11/install.sh"   &>> $LOG_FILE
+    # curl "https://gitlab.com/thecloudcareers/opensource/-/raw/master/lab-tools/maven-java11/install.sh"   &>> $LOG_FILE
+    yum install maven -y  &>> $LOGFILE    
     stat $? 
 
     CREATE_USER #Calls create user function that creates user
@@ -98,7 +99,7 @@ JAVA() {
     echo -n "Installing the ${COMPONENT} Component Dependencies :"
     cd $APPUSER_HOME
     mvn clean package   &>> $LOG_FILE
-    mv target/${COMPONENT}-1.0.jar ${COMPONENT}.jar     &
+    mv target/${COMPONENT}-1.0.jar ${COMPONENT}.jar
     stat $?
 
     CONFIG_SVS
