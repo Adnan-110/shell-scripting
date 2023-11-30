@@ -22,7 +22,6 @@ if [ "$1" == "all" ]; then
         COMPONENT=$component 
         create_server 
     done 
-#If User provides component name instead of 'all' as argument, then that will be considered.
 else 
     create_server 
 fi
