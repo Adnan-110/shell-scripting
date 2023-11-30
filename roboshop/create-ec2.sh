@@ -12,7 +12,23 @@ SGID=$(aws ec2 describe-security-groups --filters "Name=group-name, Values=Allow
 COMPONENT=$1
 HZ_ID=$(aws route53 list-hosted-zones |jq ".HostedZones[].Id" | sed -e 's/"//g' -e 's/hostedzone//g' -e 's/\///g')
 INSTANCE_TYPE=t2.micro
-echo -e "\e[36m******** Creating a Server ********\e[0m"
+
+# If  User Provides 'all' as the first argument, then all below mentioned servers will be created.
+
+
+if [ "$1" == "all" ]; then 
+
+    for component in mongodb catalogue cart user shipping frontend payment mysql redis rabbitmg; do 
+        COMPONENT=$component 
+        create_server 
+    done 
+#If User provides component name instead of 'all' as argument, then that will be considered.
+else 
+    create_server 
+fi
+
+create_server() {
+echo -e "\e[36m******** Creating a Server ********\e[0m \n"
 
 echo -e "\e[36m++++++ ${COMPONENT} Server Creation Started ++++++\e[0m"
 PRIVATE_IP=$(aws ec2 run-instances --image-id ${AMI_ID} --instance-type ${INSTANCE_TYPE} --security-group-ids ${SGID} --tag-specifications "ResourceType=instance, Tags=[{Key=Name,Value=${COMPONENT}}]" | jq ".Instances[].PrivateIpAddress" | sed -e 's/"//g')
@@ -27,3 +43,6 @@ sed -e "s/COMPONENT/${COMPONENT}/" -e "s/IPADDRESS/${PRIVATE_IP}/" route53.json 
 $ aws route53 change-resource-record-sets --hosted-zone-id ${HZ_ID} --change-batch file:///tmp/dns.json
 
 echo -e "\e[36m++++++ ${COMPONENT} DNS Record Completed Successfully ++++++\e[0m \n\n"
+}
+
+ 
