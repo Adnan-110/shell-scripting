@@ -15,7 +15,7 @@ HZ_ID=$(aws route53 list-hosted-zones |jq ".HostedZones[].Id" | sed -e 's/"//g' 
 INSTANCE_TYPE=t2.micro
 
 create_server() {
-echo -e "\e[36m******** Creating a ${${ENVIRONMENT}} Server ********\e[0m \n"
+echo -e "\e[36m******** Creating a ${ENVIRONMENT} Server ********\e[0m \n"
 
 echo -e "\e[36m++++++ ${COMPONENT}-${ENVIRONMENT} Server Creation Started ++++++\e[0m"
 PRIVATE_IP=$(aws ec2 run-instances --image-id ${AMI_ID} --instance-type ${INSTANCE_TYPE} --security-group-ids ${SGID} --tag-specifications "ResourceType=instance, Tags=[{Key=Name,Value=${COMPONENT}-${ENVIRONMENT}}]" | jq ".Instances[].PrivateIpAddress" | sed -e 's/"//g')
