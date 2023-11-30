@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [ -z $1 ] ; then
-    echo -e "\e[31m !!!!!!!! COMPONENT NAME IS NEEDED !!!!!!!!\e[0m \n\t\t"
+    echo -e "n\e[31m !!!!!!!! COMPONENT NAME IS NEEDED !!!!!!!!\e[0m \n\t\t"
     echo -e "\e[36m Example Usage : \e[0m bash create-ec2.sh componentName"
     exit 1
 fi 
