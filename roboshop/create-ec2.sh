@@ -13,19 +13,6 @@ COMPONENT=$1
 HZ_ID=$(aws route53 list-hosted-zones |jq ".HostedZones[].Id" | sed -e 's/"//g' -e 's/hostedzone//g' -e 's/\///g')
 INSTANCE_TYPE=t2.micro
 
-# If  User Provides 'all' as the first argument, then all below mentioned servers will be created.
-
-
-if [ "$1" == "all" ]; then 
-
-    for component in mongodb catalogue cart user shipping frontend payment mysql redis rabbitmg; do 
-        COMPONENT=$component 
-        create_server 
-    done 
-else 
-    create_server 
-fi
-
 create_server() {
 echo -e "\e[36m******** Creating a Server ********\e[0m \n"
 
@@ -44,4 +31,13 @@ $ aws route53 change-resource-record-sets --hosted-zone-id ${HZ_ID} --change-bat
 echo -e "\e[36m++++++ ${COMPONENT} DNS Record Completed Successfully ++++++\e[0m \n\n"
 }
 
- 
+# If  User Provides 'all' as the first argument, then all below mentioned servers will be created.
+
+if [ "$1" == "all" ]; then 
+    for component in mongodb catalogue cart user shipping frontend payment mysql redis rabbitmg; do 
+        COMPONENT=$component 
+        create_server 
+    done 
+else 
+    create_server 
+fi
