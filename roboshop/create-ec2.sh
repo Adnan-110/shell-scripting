@@ -25,7 +25,7 @@ echo -e "\e[36m++++++ ${COMPONENT}-${ENVIRONMENT} Server Creation Completed Succ
 
 echo -e "\e[36m++++++ ${COMPONENT}-${ENVIRONMENT} DNS Record Creation Started ++++++\e[0m"
 
-sed -e "s/COMPONENT/${COMPONENT}/" -e "s/IPADDRESS/${PRIVATE_IP}/" route53.json > /tmp/dns.json
+sed -e "s/COMPONENT/${COMPONENT}-{ENVIRONMENT}/" -e "s/IPADDRESS/${PRIVATE_IP}/" route53.json > /tmp/dns.json
 
 aws route53 change-resource-record-sets --hosted-zone-id ${HZ_ID} --change-batch file:///tmp/dns.json
 
