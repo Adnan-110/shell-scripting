@@ -35,7 +35,7 @@ echo -e "\e[36m++++++ ${COMPONENT}-${ENVIRONMENT} DNS Record Completed Successfu
 # If  User Provides 'all' as the first argument, then all below mentioned servers will be created.
 
 if [ "$1" == "all" ]; then 
-    for component in mongodb catalogue cart user shipping frontend payment mysql redis rabbitmg; do 
+    for component in mongodb catalogue cart user shipping frontend payment mysql redis rabbitmq; do 
         COMPONENT=$component 
         create_server 
     done 
